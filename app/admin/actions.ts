@@ -27,7 +27,9 @@ export async function logout() {
 }
 
 export async function trackEventServer(type: string, metadata: Record<string, unknown> = {}) {
-  await supabaseServer.from("events").insert({ type, metadata })
+  try {
+    await supabaseServer.from("events").insert({ type, metadata })
+  } catch { /* silent */ }
 }
 
 export async function toggleStore(isOpen: boolean, formData: FormData) {
@@ -39,13 +41,15 @@ export async function toggleStore(isOpen: boolean, formData: FormData) {
 
   if (isOpen && sendNotification) {
     const msg = "¡Arroz en Wok está abierto! 🍜\nHaz tu pedido ahora. Cerramos a las 21:30 hrs.\nhttps://wa.me/56931358884"
-    await Promise.all([
-      sendPush("¡Arroz en Wok está abierto! 🍜", "Haz tu pedido ahora. Cerramos a las 21:30 hrs."),
-      sendWhatsAppBroadcast(msg),
-    ])
-    await trackEventServer("store_opened_with_notification")
+    try {
+      await Promise.all([
+        sendPush("¡Arroz en Wok está abierto! 🍜", "Haz tu pedido ahora. Cerramos a las 21:30 hrs."),
+        sendWhatsAppBroadcast(msg),
+      ])
+    } catch { /* notificaciones fallaron, pero la tienda igual abre */ }
+    try { await trackEventServer("store_opened_with_notification") } catch { /* silent */ }
   } else if (isOpen) {
-    await trackEventServer("store_opened_silent")
+    try { await trackEventServer("store_opened_silent") } catch { /* silent */ }
   }
 
   revalidatePath("/admin")
