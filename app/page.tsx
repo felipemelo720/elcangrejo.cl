@@ -1,3 +1,4 @@
+import PageTracker from "@/components/PageTracker"
 import Navbar from "@/components/Navbar"
 import Hero from "@/components/sections/Hero"
 import StatsBar from "@/components/sections/StatsBar"
@@ -13,6 +14,7 @@ import Footer from "@/components/Footer"
 export default function Home() {
   return (
     <main>
+      <PageTracker />
       <Navbar />
       <Hero />
       <StatsBar />

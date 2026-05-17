@@ -5,11 +5,14 @@ import { cookies } from "next/headers"
 export async function GET() {
   const { data } = await supabaseServer
     .from("store_status")
-    .select("is_open")
+    .select("is_open, delivery_enabled")
     .eq("id", 1)
     .single()
 
-  return NextResponse.json({ is_open: data?.is_open ?? false })
+  return NextResponse.json({
+    is_open: data?.is_open ?? false,
+    delivery_enabled: data?.delivery_enabled ?? true,
+  })
 }
 
 export async function POST(req: NextRequest) {

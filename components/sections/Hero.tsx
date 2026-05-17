@@ -1,4 +1,4 @@
-import { MessageCircle, ChevronDown, MapPin, Clock, Star } from "lucide-react"
+import { UtensilsCrossed, ChevronDown, MapPin, Clock, Star } from "lucide-react"
 import Image from "next/image"
 import WhatsAppNotifyButton from "@/components/WhatsAppNotifyButton"
 
@@ -16,12 +16,16 @@ export default function Hero() {
       {/* Background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-[-10%] left-1/4 w-[900px] h-[600px] rounded-full blur-[140px]"
+          className="animate-drift absolute top-[-10%] left-1/4 w-[900px] h-[600px] rounded-full blur-[140px]"
           style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.22) 0%, transparent 70%)" }}
         />
         <div
-          className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px]"
-          style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.10) 0%, transparent 70%)" }}
+          className="animate-drift2 absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px]"
+          style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.12) 0%, transparent 70%)" }}
+        />
+        <div
+          className="animate-drift absolute top-1/2 left-[-10%] w-[400px] h-[400px] rounded-full blur-[100px]"
+          style={{ background: "radial-gradient(ellipse, rgba(245,158,11,0.06) 0%, transparent 70%)", animationDelay: "-6s" }}
         />
       </div>
 
@@ -52,7 +56,7 @@ export default function Hero() {
           {/* Headline */}
           <h1 className="font-heading leading-none text-white mb-4">
             <span className="block" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>SABOR</span>
-            <span className="block text-primary" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>WOK</span>
+            <span className="block text-gradient-animate" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>WOK</span>
             <span className="block text-white/65" style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}>
               EN TU PUERTA · PAINE
             </span>
@@ -83,23 +87,30 @@ export default function Hero() {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
-            <a
-              href={WA}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="animate-glow inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-8 py-4 rounded-full transition-colors duration-200 w-full sm:w-auto justify-center"
-            >
-              <MessageCircle size={22} />
-              Pedir Ahora &nbsp;·&nbsp; Desde $7.000
-            </a>
+          <div className="flex flex-col gap-3 justify-center lg:justify-start items-center lg:items-start">
+            {/* Primary row */}
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <a
+                href="#menu"
+                className="animate-glow group relative inline-flex items-center gap-3 bg-primary text-white font-bold text-base px-7 py-4 rounded-2xl transition-all duration-200 w-full sm:w-auto justify-center overflow-hidden shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98]"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                <span className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <UtensilsCrossed size={20} />
+                <span>Armar mi Pedido</span>
+                <span className="text-white/60 font-normal text-sm">· desde $7.000</span>
+              </a>
+              <a
+                href="#como-pedir"
+                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-white/70 hover:text-white font-semibold text-base px-7 py-4 rounded-2xl transition-all duration-200 w-full sm:w-auto justify-center"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                ¿Cómo pedir?
+                <ChevronDown size={16} className="opacity-60" />
+              </a>
+            </div>
+            {/* Notify row — only visible when closed */}
             <WhatsAppNotifyButton />
-            <a
-              href="#menu"
-              className="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white/70 hover:text-white font-semibold text-base px-7 py-4 rounded-full transition-all duration-200 w-full sm:w-auto justify-center"
-            >
-              Ver Menú ↓
-            </a>
           </div>
 
           {/* Location + hours pills */}

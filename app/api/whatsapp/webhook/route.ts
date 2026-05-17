@@ -1,5 +1,6 @@
 import { supabaseServer } from "@/lib/supabase-server"
 import { NextRequest, NextResponse } from "next/server"
+import { trackEventServer } from "@/app/admin/actions"
 
 // Meta webhook verification
 export async function GET(req: NextRequest) {
@@ -24,9 +25,10 @@ export async function POST(req: NextRequest) {
     for (const msg of messages) {
       const phone = msg.from as string | undefined
       if (!phone) continue
-      await supabaseServer
-        .from("whatsapp_subscribers")
-        .upsert({ phone }, { onConflict: "phone" })
+      await Promise.all([
+        supabaseServer.from("whatsapp_subscribers").upsert({ phone }, { onConflict: "phone" }),
+        trackEventServer("wa_order_received", { phone }),
+      ])
     }
   } catch {
     // Meta requires 200 always

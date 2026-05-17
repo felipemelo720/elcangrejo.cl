@@ -1,4 +1,3 @@
-import { MessageCircle } from "lucide-react"
 
 function IgIcon() {
   return (
@@ -11,7 +10,6 @@ function IgIcon() {
 }
 import RevealWrapper from "@/components/RevealWrapper"
 
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%9C"
 const IG = "https://www.instagram.com/arrozenwok"
 
 export default function CTAFinalSection() {
@@ -58,15 +56,6 @@ export default function CTAFinalSection() {
         </RevealWrapper>
 
         <RevealWrapper delay={3} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="animate-glow inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-xl px-10 py-5 rounded-full transition-colors duration-200"
-          >
-            <MessageCircle size={24} />
-            Pedir por WhatsApp
-          </a>
           <a
             href={IG}
             target="_blank"

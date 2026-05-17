@@ -1,32 +1,30 @@
-import { BookOpen, MessageCircle, Package } from "lucide-react"
+import { ShoppingCart, CheckCircle, Package } from "lucide-react"
 import RevealWrapper from "@/components/RevealWrapper"
-
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%9C"
 
 const steps = [
   {
     number: "01",
-    icon: <BookOpen size={26} />,
-    title: "Elige tu Box",
-    desc: "Revisa el menú y decide qué proteínas y base quieres. Arroz, fideos o papas — tú mandas.",
+    icon: <ShoppingCart size={26} />,
+    title: "Elige del menú",
+    desc: "Navega el menú, elige tu box, proteína y extras. Agrega todo al carrito desde acá — sin apps ni registro.",
   },
   {
     number: "02",
-    icon: <MessageCircle size={26} />,
-    title: "Escríbenos por WhatsApp",
-    desc: "Manda tu pedido al +56 9 3135 8884. Te confirmamos disponibilidad y coordinas el detalle.",
+    icon: <CheckCircle size={26} />,
+    title: "Confirma tu pedido",
+    desc: "Ingresa tu nombre, elige retiro o delivery, y el método de pago. Se arma el mensaje automáticamente.",
   },
   {
     number: "03",
     icon: <Package size={26} />,
-    title: "Retira o Recibe",
-    desc: "Pasa por Villa Las Américas o recíbelo en tu puerta dentro de Paine. Así de fácil.",
+    title: "Retira o recibe",
+    desc: "Te enviamos tu pedido por WhatsApp y lo coordinamos. Listo en Villa Las Américas o en tu puerta en Paine.",
   },
 ]
 
 export default function HowToOrderSection() {
   return (
-    <section className="bg-surface py-24 px-4 sm:px-6 border-y border-white/5">
+    <section id="como-pedir" className="bg-surface py-24 px-4 sm:px-6 border-y border-white/5">
       <div className="max-w-5xl mx-auto">
         <RevealWrapper className="text-center mb-16">
           <h2 className="font-heading text-white" style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}>
@@ -66,13 +64,11 @@ export default function HowToOrderSection() {
 
         <RevealWrapper delay={4} className="text-center mt-14">
           <a
-            href={WA}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#menu"
             className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-9 py-4 rounded-full transition-colors duration-200 animate-glow"
           >
-            <MessageCircle size={20} />
-            Comenzar Pedido Ahora
+            <ShoppingCart size={20} />
+            Armar mi Pedido
           </a>
         </RevealWrapper>
       </div>

@@ -53,7 +53,7 @@ function ExtraAddButton({ item }: { item: typeof extras[number] }) {
 
 export default function ExtrasSection() {
   return (
-    <section className="bg-surface py-20 px-4 sm:px-6 border-y border-white/5">
+    <section id="extras" className="bg-surface py-20 px-4 sm:px-6 border-y border-white/5">
       <div className="max-w-6xl mx-auto">
         <RevealWrapper className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-accent/10 border border-accent/25 text-accent text-sm font-semibold px-4 py-2 rounded-full mb-5">
