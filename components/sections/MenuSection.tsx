@@ -1,9 +1,8 @@
 "use client"
 
-import { Flame, Star, Sparkles, Crown, Zap, UtensilsCrossed, Clock, Plus, Check } from "lucide-react"
+import { Flame, Star, Sparkles, Crown, Zap, UtensilsCrossed, Plus, Check } from "lucide-react"
 import RevealWrapper from "@/components/RevealWrapper"
-import Image from "next/image"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useCart } from "@/context/CartContext"
 
 function parsePrice(label: string): number {
@@ -117,11 +116,31 @@ function AddButton({ item }: { item: MenuItem }) {
 }
 
 function MenuCard({ item, delay }: { item: MenuItem; delay: 0 | 1 | 2 | 3 | 4 | 5 }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const el = cardRef.current
+    if (!el) return
+    const { left, top, width, height } = el.getBoundingClientRect()
+    const x = (e.clientX - left) / width - 0.5
+    const y = (e.clientY - top) / height - 0.5
+    el.style.transform = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateZ(8px)`
+  }
+
+  function handleMouseLeave() {
+    const el = cardRef.current
+    if (!el) return
+    el.style.transform = "perspective(600px) rotateY(0deg) rotateX(0deg) translateZ(0px)"
+  }
+
   return (
     <RevealWrapper delay={delay} className="h-full">
       <div
-        className="card-hover group relative h-full rounded-2xl border border-white/10 overflow-hidden flex flex-col"
-        style={{ background: item.gradient }}
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="shimmer-card group relative h-full rounded-2xl border border-white/10 overflow-hidden flex flex-col"
+        style={{ background: item.gradient, transition: "transform 0.2s ease, box-shadow 0.2s ease", willChange: "transform" }}
       >
         {/* Top shimmer line */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />
@@ -182,23 +201,6 @@ export default function MenuSection() {
           <p className="text-white/45 mt-2 text-base max-w-md mx-auto" style={{ fontFamily: "var(--font-inter)" }}>
             Cada box preparado al momento en el wok. Sin recalentar, sin congelar.
           </p>
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-white/50 text-xs font-semibold px-4 py-2 rounded-full mt-4" style={{ fontFamily: "var(--font-inter)" }}>
-            <Clock size={12} />
-            SÁBADO · 17:30 A 21:30 HRS
-          </div>
-        </RevealWrapper>
-
-        {/* Menu photo */}
-        <RevealWrapper className="mb-14">
-          <div className="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-xl">
-            <Image
-              src="/menuarrozenwok.webp"
-              alt="Menú Arroz en Wok"
-              width={400}
-              height={700}
-              className="w-full h-auto object-cover"
-            />
-          </div>
         </RevealWrapper>
 
         {/* Rice & Chip Box */}

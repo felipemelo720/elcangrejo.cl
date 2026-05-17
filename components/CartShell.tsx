@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { CartProvider } from "@/context/CartContext"
 import CartFAB from "@/components/CartFAB"
 import CartDrawer from "@/components/CartDrawer"
@@ -8,6 +9,8 @@ import CartDrawer from "@/components/CartDrawer"
 export default function CartShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false)
   const [deliveryEnabled, setDeliveryEnabled] = useState(true)
+  const pathname = usePathname()
+  const isAdmin = pathname?.startsWith("/admin")
 
   useEffect(() => {
     fetch("/api/store/status")
@@ -19,8 +22,8 @@ export default function CartShell({ children }: { children: React.ReactNode }) {
   return (
     <CartProvider>
       {children}
-      <CartFAB onOpen={() => setOpen(true)} />
-      <CartDrawer open={open} onClose={() => setOpen(false)} deliveryEnabled={deliveryEnabled} />
+      {!isAdmin && <CartFAB onOpen={() => setOpen(true)} />}
+      {!isAdmin && <CartDrawer open={open} onClose={() => setOpen(false)} deliveryEnabled={deliveryEnabled} />}
     </CartProvider>
   )
 }
