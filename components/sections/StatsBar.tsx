@@ -1,12 +1,12 @@
 const items = [
-  "🍜 ARROZ FRITO",
-  "🔥 FIDEOS CHAUMIN",
-  "🥩 CARNE MONGOLIANA",
-  "🍊 POLLO A LA NARANJA",
-  "🦐 CAMARONES SALTEADOS",
-  "🌱 OPCIÓN VEGETARIANA",
-  "🥟 ARROLLADOS PRIMAVERA",
+  "🌀 HAN ROLLS",
+  "🍱 GOHAN BOWL",
+  "🎁 PIEZAS MIXTAS",
+  "🥟 EMPANADAS FRITAS",
+  "🍗 POLLO CRISPY",
   "🍟 PAPAS FRITAS",
+  "🌊 SUSHI FRESCO",
+  "🦀 SUSHI & CEVICHES",
 ]
 
 export default function StatsBar() {

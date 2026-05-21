@@ -27,10 +27,10 @@ export default function StatsChart({ days }: { days: DayStat[] }) {
       </div>
 
       {/* Bars */}
-      <div className="flex items-end gap-2 h-32">
+      <div className="flex items-stretch gap-2 h-32">
         {days.map((day) => (
           <div key={day.label} className="flex-1 flex flex-col items-center gap-1">
-            <div className="w-full flex flex-col-reverse gap-0.5 flex-1 justify-start items-center">
+            <div className="w-full flex flex-col-reverse gap-0.5 flex-1 justify-start items-center overflow-hidden">
               {SERIES.map((s) => {
                 const h = Math.round((day[s.key] / max) * 100)
                 return h > 0 ? (

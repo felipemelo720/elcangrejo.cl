@@ -11,8 +11,9 @@ function formatCLP(n: number): string {
 }
 
 const EXTRAS = [
-  { id: "Arrollados Primavera", name: "Arrollados Primavera", emoji: "🥟", price: 3500, priceLabel: "$3.500" },
-  { id: "Papas Fritas",         name: "Papas Fritas",         emoji: "🍟", price: 4000, priceLabel: "$4.000" },
+  { id: "Gyoza",     name: "Gyoza",     emoji: "🥟", price: 3500, priceLabel: "$3.500" },
+  { id: "Edamame",   name: "Edamame",   emoji: "🫛", price: 2500, priceLabel: "$2.500" },
+  { id: "Miso Soup", name: "Miso Soup", emoji: "🍜", price: 2000, priceLabel: "$2.000" },
 ]
 
 type DeliveryType = "retiro" | "delivery" | null
@@ -159,7 +160,7 @@ export default function CartDrawer({
             <div className="flex-1 overflow-y-auto p-4 space-y-3">
               {items.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
-                  <span className="text-5xl">🍜</span>
+                  <span className="text-5xl">🍣</span>
                   <p className="text-white/40 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
                     Tu carrito está vacío.<br />Agrega algo del menú.
                   </p>

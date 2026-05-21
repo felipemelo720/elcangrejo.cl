@@ -5,21 +5,21 @@ const reviews = [
   {
     name: "María J.",
     location: "Paine",
-    text: "La carne mongoliana es increíble. Llevo semanas pidiendo lo mismo cada sábado — no me canso. El arroz frito queda perfecto.",
+    text: "El Cangrejo Roll es increíble. Llevo semanas pidiendo lo mismo cada sábado — no me canso. El sushi queda fresquísimo y se nota que es al momento.",
     initial: "M",
-    color: "#E31E24",
+    color: "#E85D4A",
   },
   {
     name: "Diego V.",
     location: "Paine",
-    text: "El Mix Rice con mongoliana y camarones es una combinación que no tiene competencia. Vale cada peso. Llegó caliente y bien presentado.",
+    text: "El Rainbow Roll es una combinación que no tiene competencia en Paine. Vale cada peso. Llegó perfecto y bien presentado — como en restaurant.",
     initial: "D",
     color: "#7C3AED",
   },
   {
     name: "Valentina M.",
     location: "Villa Las Américas",
-    text: "El Shrimp Chaumin quedó delicioso. Los camarones frescos hacen toda la diferencia. La coordinación por WhatsApp es súper rápida.",
+    text: "El Sashimi Set quedó delicioso. El salmón fresco hace toda la diferencia. La coordinación por WhatsApp es súper rápida y sin vueltas.",
     initial: "V",
     color: "#0891B2",
   },
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
             LO QUE DICEN <span className="text-primary">NUESTROS CLIENTES</span>
           </h2>
           <p className="text-white/40 mt-2 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
-            +1.125 personas ya lo saben.
+            +500 personas ya lo saben.
           </p>
         </RevealWrapper>
 

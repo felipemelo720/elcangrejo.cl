@@ -4,17 +4,17 @@ import RevealWrapper from "@/components/RevealWrapper"
 const reasons = [
   {
     icon: <Flame size={28} />,
-    iconBg: "#3D1515",
-    iconColor: "#FF6B35",
-    title: "Cocinado al Momento",
-    desc: "Cada box sale directo del wok a tu mano. Sin microondas, sin congelados. Sabor real en cada bocado.",
+    iconBg: "#3D2008",
+    iconColor: "#F97316",
+    title: "Preparado al Momento",
+    desc: "Han Rolls, Gohan y Piezas armadas al instante. Sin refrigerados de días anteriores.",
   },
   {
     icon: <Leaf size={28} />,
     iconBg: "#0D2D15",
     iconColor: "#4ADE80",
     title: "Ingredientes Frescos",
-    desc: "Verduras reales, proteínas de calidad. Lo que va al wok, va directo desde el mercado.",
+    desc: "Salmón, camarón y kanikama de calidad. Palta, cebollín y queso en cada preparación.",
   },
   {
     icon: <Zap size={28} />,
@@ -28,7 +28,7 @@ const reasons = [
     iconBg: "#2D0D30",
     iconColor: "#C084FC",
     title: "Trato Directo",
-    desc: "Hablamos contigo, coordinamos a tu medida. Retiro o delivery — tú decides cómo y dónde.",
+    desc: "Hablamos contigo, coordinamos a tu medida. Retiro en Aracena #864 o delivery en Paine.",
   },
 ]
 
@@ -41,7 +41,7 @@ export default function WhyUsSection() {
             ¿POR QUÉ <span className="text-primary">ELEGIRNOS?</span>
           </h2>
           <p className="text-white/40 mt-3 text-base max-w-sm mx-auto" style={{ fontFamily: "var(--font-inter)" }}>
-            No somos un restaurante. Somos algo mejor.
+            No somos un restaurante. Somos tu sushiman de barrio.
           </p>
         </RevealWrapper>
 

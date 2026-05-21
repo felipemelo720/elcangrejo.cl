@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers"
 import { supabaseServer } from "@/lib/supabase-server"
-import { sendWhatsAppMessage } from "@/lib/whatsapp"
 import { revalidatePath } from "next/cache"
 
 const COOKIE = "admin_session"
@@ -32,23 +31,12 @@ export async function trackEventServer(type: string, metadata: Record<string, un
   } catch { /* silent */ }
 }
 
-export async function toggleStore(isOpen: boolean, formData: FormData) {
-  const sendNotification = formData.get("sendNotification") === "on"
-
+export async function toggleStore(isOpen: boolean) {
   await supabaseServer
     .from("store_status")
     .upsert({ id: 1, is_open: isOpen, updated_at: new Date().toISOString() })
 
-  if (isOpen && sendNotification) {
-    const msg = "¡Arroz en Wok está abierto! 🍜\nHaz tu pedido ahora. Cerramos a las 21:30 hrs.\nhttps://wa.me/56931358884"
-    try {
-      await Promise.all([
-        sendPush("¡Arroz en Wok está abierto! 🍜", "Haz tu pedido ahora. Cerramos a las 21:30 hrs."),
-        sendWhatsAppBroadcast(msg),
-      ])
-    } catch { /* notificaciones fallaron, pero la tienda igual abre */ }
-    try { await trackEventServer("store_opened_with_notification") } catch { /* silent */ }
-  } else if (isOpen) {
+  if (isOpen) {
     try { await trackEventServer("store_opened_silent") } catch { /* silent */ }
   }
 
@@ -59,6 +47,25 @@ export async function toggleDelivery(enabled: boolean) {
   await supabaseServer
     .from("store_status")
     .upsert({ id: 1, delivery_enabled: enabled, updated_at: new Date().toISOString() })
+  revalidatePath("/admin")
+}
+
+export async function toggleSoldOut(itemId: string, soldOut: boolean) {
+  const { data } = await supabaseServer
+    .from("store_status")
+    .select("sold_out_items")
+    .eq("id", 1)
+    .single()
+
+  const current: string[] = (data as { sold_out_items?: string[] } | null)?.sold_out_items ?? []
+  const updated = soldOut
+    ? [...new Set([...current, itemId])]
+    : current.filter((id) => id !== itemId)
+
+  await supabaseServer
+    .from("store_status")
+    .upsert({ id: 1, sold_out_items: updated, updated_at: new Date().toISOString() })
+
   revalidatePath("/admin")
 }
 
@@ -82,28 +89,13 @@ export async function sendPush(title: string, body: string) {
   await trackEventServer("push_sent", { title, recipients: count ?? 0 })
 }
 
-export async function sendWhatsAppBroadcast(text: string) {
-  const { data: subscribers } = await supabaseServer
-    .from("whatsapp_subscribers")
-    .select("phone")
-
-  if (!subscribers?.length) return
-
-  await Promise.allSettled(
-    subscribers.map((s) => sendWhatsAppMessage(s.phone, text))
-  )
-
-  await trackEventServer("wa_broadcast_sent", { recipients: subscribers.length })
-}
-
 export async function getAdminData() {
   const [statusRes, pushCountRes, waCountRes] = await Promise.all([
-    supabaseServer.from("store_status").select("is_open, delivery_enabled").eq("id", 1).single(),
+    supabaseServer.from("store_status").select("is_open, delivery_enabled, sold_out_items").eq("id", 1).single(),
     supabaseServer.from("push_subscriptions").select("*", { count: "exact", head: true }),
     supabaseServer.from("whatsapp_subscribers").select("*", { count: "exact", head: true }),
   ])
 
-  // If delivery_enabled column doesn't exist yet, fall back to is_open-only query
   const statusData = statusRes.error
     ? (await supabaseServer.from("store_status").select("is_open").eq("id", 1).single()).data
     : statusRes.data
@@ -111,6 +103,7 @@ export async function getAdminData() {
   return {
     isOpen: statusData?.is_open ?? false,
     deliveryEnabled: (statusData as { delivery_enabled?: boolean } | null)?.delivery_enabled ?? true,
+    soldOutItems: (statusData as { sold_out_items?: string[] } | null)?.sold_out_items ?? [],
     subscriberCount: pushCountRes.count ?? 0,
     waSubscriberCount: waCountRes.count ?? 0,
   }

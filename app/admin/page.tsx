@@ -1,6 +1,7 @@
 import { cookies } from "next/headers"
-import { login, logout, toggleStore, toggleDelivery, sendPush, getAdminData, getStats } from "./actions"
+import { login, logout, toggleStore, toggleDelivery, getAdminData, getStats } from "./actions"
 import StatsChart from "./StatsChart"
+import SoldOutManager from "@/components/admin/SoldOutManager"
 
 export default async function AdminPage() {
   const jar = await cookies()
@@ -36,7 +37,7 @@ export default async function AdminPage() {
     )
   }
 
-  const [{ isOpen, deliveryEnabled, subscriberCount, waSubscriberCount }, stats] = await Promise.all([
+  const [{ isOpen, deliveryEnabled, soldOutItems, subscriberCount, waSubscriberCount }, stats] = await Promise.all([
     getAdminData(),
     getStats(),
   ])
@@ -89,24 +90,12 @@ export default async function AdminPage() {
             </div>
             <div className="text-white/30 text-xs text-right space-y-1" style={{ fontFamily: "var(--font-inter)" }}>
               <p>{subscriberCount} push · {waSubscriberCount} WA</p>
-              <p>recibirán notificación</p>
+              <p>suscriptores</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            {/* Abrir: checkbox inside form for sendNotification */}
-            <form action={toggleStore.bind(null, true)} className="space-y-2">
-              <label className="flex items-center gap-2 cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  name="sendNotification"
-                  defaultChecked
-                  className="accent-green-400 w-4 h-4"
-                />
-                <span className="text-white/50 text-xs" style={{ fontFamily: "var(--font-inter)" }}>
-                  Enviar notificación
-                </span>
-              </label>
+            <form action={toggleStore.bind(null, true)}>
               <button
                 type="submit"
                 disabled={isOpen}
@@ -121,7 +110,7 @@ export default async function AdminPage() {
               <button
                 type="submit"
                 disabled={!isOpen}
-                className="w-full h-full bg-red-500/20 hover:bg-red-500/30 disabled:opacity-40 disabled:cursor-not-allowed border border-red-500/40 text-red-400 font-bold py-3 rounded-xl transition-colors text-sm"
+                className="w-full bg-red-500/20 hover:bg-red-500/30 disabled:opacity-40 disabled:cursor-not-allowed border border-red-500/40 text-red-400 font-bold py-3 rounded-xl transition-colors text-sm"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 Cerrar negocio
@@ -169,46 +158,8 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        {/* Custom notification */}
-        <div className="bg-surface border border-white/10 rounded-2xl p-6 space-y-4">
-          <p className="text-white/40 text-xs uppercase tracking-widest" style={{ fontFamily: "var(--font-inter)" }}>
-            Enviar notificación manual
-          </p>
-          <form
-            action={async (fd: FormData) => {
-              "use server"
-              const title = fd.get("title") as string
-              const body = fd.get("body") as string
-              if (title) await sendPush(title, body)
-            }}
-            className="space-y-3"
-          >
-            <input
-              name="title"
-              type="text"
-              placeholder="Título"
-              required
-              defaultValue="¡Arroz en Wok!"
-              className="w-full bg-card border border-white/10 text-white placeholder-white/30 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            />
-            <input
-              name="body"
-              type="text"
-              placeholder="Mensaje"
-              defaultValue="Ya estamos abiertos. Haz tu pedido ahora 🍜"
-              className="w-full bg-card border border-white/10 text-white placeholder-white/30 rounded-xl px-4 py-3 text-sm outline-none focus:border-primary transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            />
-            <button
-              type="submit"
-              className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-xl transition-colors text-sm"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              Enviar notificación
-            </button>
-          </form>
-        </div>
+        {/* Sold out manager */}
+        <SoldOutManager initialSoldOut={soldOutItems} />
 
         {/* Stats */}
         <div className="bg-surface border border-white/10 rounded-2xl p-6 space-y-6">
@@ -216,7 +167,6 @@ export default async function AdminPage() {
             Estadísticas — últimos 7 días
           </p>
 
-          {/* Counter cards */}
           <div className="grid grid-cols-3 gap-3">
             {[
               { label: "Visitas",    value: stats.totals.page_visit,       color: "text-blue-400" },
@@ -243,7 +193,6 @@ export default async function AdminPage() {
             ))}
           </div>
 
-          {/* Chart */}
           <StatsChart days={stats.days} />
         </div>
 

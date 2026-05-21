@@ -1,12 +1,8 @@
 import { UtensilsCrossed, ChevronDown, MapPin, Clock, Star } from "lucide-react"
-import Image from "next/image"
-import WhatsAppNotifyButton from "@/components/WhatsAppNotifyButton"
-
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%9C"
 
 const pills = [
   { icon: <MapPin size={14} />, text: "Delivery en Paine" },
-  { icon: <MapPin size={14} />, text: "Retiro Villa Las Américas" },
+  { icon: <MapPin size={14} />, text: "Retiro Calle Aracena #864" },
   { icon: <Clock size={14} />, text: "17:30 – 21:30 hrs" },
 ]
 
@@ -17,11 +13,11 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="animate-drift absolute top-[-10%] left-1/4 w-[900px] h-[600px] rounded-full blur-[140px]"
-          style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.22) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.22) 0%, transparent 70%)" }}
         />
         <div
           className="animate-drift2 absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px]"
-          style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.12) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.12) 0%, transparent 70%)" }}
         />
         <div
           className="animate-drift absolute top-1/2 left-[-10%] w-[400px] h-[400px] rounded-full blur-[100px]"
@@ -38,10 +34,10 @@ export default function Hero() {
         }}
       />
 
-      {/* Red edge accent */}
+      {/* Edge accent */}
       <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-primary via-primary/30 to-transparent" />
 
-      {/* Grid layout: text left, image right */}
+      {/* Grid layout: text left, visual right */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 lg:pt-32 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
 
         {/* LEFT — copy */}
@@ -55,8 +51,8 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="font-heading leading-none text-white mb-4">
-            <span className="block" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>SABOR</span>
-            <span className="block text-gradient-animate" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>WOK</span>
+            <span className="block" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>SUSHI</span>
+            <span className="block text-gradient-animate" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>&amp; CEVICHES</span>
             <span className="block text-white/65" style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}>
               EN TU PUERTA · PAINE
             </span>
@@ -67,7 +63,7 @@ export default function Hero() {
             className="text-white/55 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 mt-4 mb-6 leading-relaxed"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            Arroz frito y fideos chaumin preparados al momento en el wok.
+            Han Rolls, Gohan, Piezas Mixtas y Empanadas preparados al momento.
             Sin apps de delivery — solo WhatsApp, precio directo.
           </p>
 
@@ -82,13 +78,12 @@ export default function Hero() {
               className="text-white/50 text-sm"
               style={{ fontFamily: "var(--font-inter)" }}
             >
-              +200 pedidos en Paine
+              +150 pedidos en Paine
             </span>
           </div>
 
           {/* CTAs */}
           <div className="flex flex-col gap-3 justify-center lg:justify-start items-center lg:items-start">
-            {/* Primary row */}
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <a
                 href="#menu"
@@ -98,7 +93,7 @@ export default function Hero() {
                 <span className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <UtensilsCrossed size={20} />
                 <span>Armar mi Pedido</span>
-                <span className="text-white/60 font-normal text-sm">· desde $7.000</span>
+                <span className="text-white/60 font-normal text-sm">· desde $3.000</span>
               </a>
               <a
                 href="#como-pedir"
@@ -109,8 +104,6 @@ export default function Hero() {
                 <ChevronDown size={16} className="opacity-60" />
               </a>
             </div>
-            {/* Notify row — only visible when closed */}
-            <WhatsAppNotifyButton />
           </div>
 
           {/* Location + hours pills */}
@@ -127,54 +120,40 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* RIGHT — food photo */}
+        {/* RIGHT — visual card */}
         <div className="flex items-center justify-center">
           <div className="relative w-full max-w-[440px]">
-            {/* Glow behind image */}
             <div
               className="absolute inset-0 rounded-3xl blur-3xl scale-90 opacity-70"
-              style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.40) 0%, transparent 65%)" }}
+              style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.40) 0%, transparent 65%)" }}
             />
 
-            {/* Photo */}
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5]">
-              <Image
-                src="/ftocomida.webp"
-                alt="Box de arroz frito Arroz en Wok"
-                fill
-                className="object-cover"
-                priority
-              />
-              {/* Gradient overlay bottom */}
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] bg-gradient-to-br from-[#1a0a08] to-[#0a0a0a] flex flex-col items-center justify-center gap-6 p-8">
+              <span className="text-[8rem] leading-none select-none">🍣</span>
+              <div className="text-center">
+                <p className="font-heading text-4xl text-white leading-none mb-1">EL CANGREJO</p>
+                <p className="text-white/40 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+                  Sushi &amp; Ceviches · Paine
+                </p>
+              </div>
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
 
-              {/* Info overlay at bottom of photo */}
               <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center justify-between">
                 <div>
-                  <p
-                    className="text-white/50 text-xs mb-0.5"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    Desde
-                  </p>
-                  <p className="font-heading text-3xl text-white leading-none">$7.000</p>
+                  <p className="text-white/50 text-xs mb-0.5" style={{ fontFamily: "var(--font-inter)" }}>Desde</p>
+                  <p className="font-heading text-3xl text-white leading-none">$3.000</p>
                 </div>
                 <div className="h-8 w-px bg-white/15" />
                 <div className="text-right">
-                  <p
-                    className="text-white/50 text-xs mb-0.5"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    Disponible
-                  </p>
+                  <p className="text-white/50 text-xs mb-0.5" style={{ fontFamily: "var(--font-inter)" }}>Disponible</p>
                   <p className="font-heading text-lg text-white leading-none">JUE · VIE · SÁB</p>
                 </div>
               </div>
             </div>
 
-            {/* Floating freshness tag */}
             <div className="absolute -top-3 -right-2 lg:-right-5 bg-accent text-black font-bold text-xs sm:text-sm px-4 py-2 rounded-full shadow-xl rotate-3 whitespace-nowrap">
-              🔥 FRESCO · AL MOMENTO
+              🦀 SUSHI & CEVICHES
             </div>
           </div>
         </div>

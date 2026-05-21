@@ -2,7 +2,7 @@ import React from "react"
 import { MessageCircle, AlertCircle } from "lucide-react"
 import RevealWrapper from "@/components/RevealWrapper"
 
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%9C"
+const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
 
 const days = [
   { day: "JUEVES", short: "JUE" },
@@ -17,7 +17,7 @@ export default function UrgencySection() {
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px]"
-          style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.10) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.10) 0%, transparent 70%)" }}
         />
       </div>
 
@@ -77,7 +77,7 @@ export default function UrgencySection() {
         {/* Subtext + CTA */}
         <RevealWrapper delay={4}>
           <p className="text-white/40 text-sm mb-8 max-w-xs mx-auto leading-relaxed" style={{ fontFamily: "var(--font-inter)" }}>
-            Los cupos son limitados. No te quedes sin tu box esta semana.
+            Los cupos son limitados. No te quedes sin tu sushi esta semana.
           </p>
           <a
             href={WA}
@@ -86,7 +86,7 @@ export default function UrgencySection() {
             className="animate-glow inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-10 py-4 rounded-full transition-colors duration-200"
           >
             <MessageCircle size={20} />
-            Asegurar mi Box Ahora
+            Asegurar mi Pedido Ahora
           </a>
         </RevealWrapper>
 

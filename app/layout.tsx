@@ -13,13 +13,13 @@ const bebasNeue = Bebas_Neue({
 })
 
 export const metadata: Metadata = {
-  title: "Arroz en Wok | Comida Asiática en Paine",
+  title: "El Cangrejo | Sushi en Paine",
   description:
-    "Boxes de arroz frito, fideos chaumin, carne mongoliana y más. Delivery en Paine y retiro en Villa Las Américas. Jueves a Sábado 17:30–21:30.",
+    "Rolls, nigiris y sashimi frescos. Delivery en Paine y retiro en Villa Las Américas. Jueves a Sábado 17:30–21:30.",
   openGraph: {
-    title: "Arroz en Wok",
-    description: "El wok más rico de Paine. Jue–Sáb 17:30 a 21:30.",
-    siteName: "Arroz en Wok",
+    title: "El Cangrejo",
+    description: "El sushi más fresco de Paine. Jue–Sáb 17:30 a 21:30.",
+    siteName: "El Cangrejo",
   },
 }
 

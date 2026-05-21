@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import StoreStatusBar from "@/components/StoreStatusBar"
 
 const NAV_LINKS = [
@@ -37,15 +36,12 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) }}>
-          <Image
-            src="/logoarrrozenwok.jpg"
-            alt="Arroz en Wok"
-            width={44}
-            height={44}
-            className="rounded-full object-cover"
-            priority
-          />
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) }}
+          className="font-heading text-2xl text-white tracking-wider"
+        >
+          🦀 EL CANGREJO
         </a>
 
         {/* Desktop nav links */}

@@ -13,3 +13,7 @@ CREATE TABLE IF NOT EXISTS events (
 );
 
 CREATE INDEX IF NOT EXISTS events_type_created ON events (type, created_at DESC);
+
+-- 3. Sold out items array on store_status
+ALTER TABLE store_status
+  ADD COLUMN IF NOT EXISTS sold_out_items text[] NOT NULL DEFAULT '{}';

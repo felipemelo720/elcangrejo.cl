@@ -10,7 +10,7 @@ function IgIcon() {
 }
 import RevealWrapper from "@/components/RevealWrapper"
 
-const IG = "https://www.instagram.com/arrozenwok"
+const IG = "https://www.instagram.com/elcangrejo"
 
 export default function CTAFinalSection() {
   return (
@@ -19,7 +19,7 @@ export default function CTAFinalSection() {
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[120px]"
-          style={{ background: "radial-gradient(ellipse, rgba(227,30,36,0.25) 0%, transparent 65%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.25) 0%, transparent 65%)" }}
         />
       </div>
 
@@ -34,7 +34,7 @@ export default function CTAFinalSection() {
       <div className="relative max-w-4xl mx-auto text-center">
         <RevealWrapper>
           <p className="font-heading text-primary/70 text-2xl tracking-widest mb-2">
-            — EL WOK MÁS RICO DE PAINE —
+            — EL SUSHI MÁS FRESCO DE PAINE —
           </p>
         </RevealWrapper>
 
@@ -51,7 +51,7 @@ export default function CTAFinalSection() {
 
         <RevealWrapper delay={2}>
           <p className="text-white/50 text-lg mb-10 max-w-sm mx-auto" style={{ fontFamily: "var(--font-inter)" }}>
-            Escríbenos y en minutos tienes tu box confirmado.
+            Escríbenos y en minutos tienes tu sushi confirmado.
           </p>
         </RevealWrapper>
 
@@ -63,7 +63,7 @@ export default function CTAFinalSection() {
             className="inline-flex items-center gap-3 border border-white/20 hover:border-white/50 text-white/70 hover:text-white font-semibold text-lg px-8 py-5 rounded-full transition-all duration-200"
           >
             <IgIcon />
-            @arrozenwok
+            @elcangrejo
           </a>
         </RevealWrapper>
       </div>

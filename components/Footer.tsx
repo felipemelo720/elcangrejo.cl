@@ -10,8 +10,8 @@ function IgIcon() {
   )
 }
 
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%9C"
-const IG = "https://www.instagram.com/arrozenwok"
+const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
+const IG = "https://www.instagram.com/elcangrejo"
 
 export default function Footer() {
   return (
@@ -21,10 +21,10 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <span className="font-heading text-3xl text-white block mb-2">
-              ARROZ <span className="text-primary">EN</span> WOK
+              EL <span className="text-primary">CANGREJO</span>
             </span>
             <p className="text-white/40 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
-              Sabores irresistibles del wok, directo a tu mesa.
+              Sushi &amp; Ceviches · directo a tu puerta en Paine.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2 text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
               <MapPin size={14} className="text-primary shrink-0" />
-              Retiro Villa Las Américas
+              Retiro: Calle Aracena y Monckenberg #864
             </div>
           </div>
 
@@ -64,13 +64,13 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-inter)" }}
             >
               <span className="text-primary"><IgIcon /></span>
-              @arrozenwok
+              @elcangrejo
             </a>
           </div>
         </div>
 
         <p className="text-center text-white/20 text-xs mt-6" style={{ fontFamily: "var(--font-inter)" }}>
-          © {new Date().getFullYear()} Arroz en Wok — Paine, Chile
+          © {new Date().getFullYear()} El Cangrejo — Paine, Chile
         </p>
       </div>
     </footer>
