@@ -2,8 +2,8 @@ import { UtensilsCrossed, ChevronDown, MapPin, Clock, Star } from "lucide-react"
 
 const pills = [
   { icon: <MapPin size={13} />, text: "Delivery en Paine" },
-  { icon: <MapPin size={13} />, text: "Retiro Calle Aracena #864" },
-  { icon: <Clock size={13} />, text: "17:30 – 21:30 hrs" },
+  { icon: <MapPin size={13} />, text: "Retiro Aracena y Monkeberg 864" },
+  { icon: <Clock size={13} />, text: "16:00 – 00:00 hrs" },
 ]
 
 export default function Hero() {
@@ -44,7 +44,7 @@ export default function Hero() {
           style={{ fontFamily: "var(--font-inter)" }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-          JUE · VIE · SÁB &nbsp;—&nbsp; 17:30 a 21:30 HRS
+          LUN · MAR · MIÉ · JUE · VIE · SÁB &nbsp;—&nbsp; 16:00 a 00:00 HRS
         </div>
 
         {/* Headline */}

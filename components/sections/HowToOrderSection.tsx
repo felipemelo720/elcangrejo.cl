@@ -18,7 +18,7 @@ const steps = [
     number: "03",
     icon: <Package size={18} />,
     title: "Retira o recibe",
-    desc: "Te enviamos tu pedido por WhatsApp y lo coordinamos. Listo en Villa Las Américas o en tu puerta en Paine.",
+    desc: "Te enviamos tu pedido por WhatsApp y lo coordinamos. Retiro en Aracena y Monkeberg 864 o delivery en Paine.",
   },
 ]
 

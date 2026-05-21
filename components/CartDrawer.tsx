@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { X, Plus, Minus, MessageCircle, Trash2, ChevronRight, MapPin, Package, Banknote, CreditCard, ArrowLeft } from "lucide-react"
 import { useCart, CartItem } from "@/context/CartContext"
 
-const WA_NUMBER = "56931358884"
+const WA_NUMBER = "56964583021"
 
 function formatCLP(n: number): string {
   return "$" + n.toLocaleString("es-CL")
@@ -32,7 +32,7 @@ function buildWAMessage(
   payment: Payment
 ): string {
   const lines = items.map((i) => `• ${i.qty}x ${i.name}`).join("\n")
-  const entrega = delivery === "delivery" ? `Delivery — ${address}` : "Retiro en Villa Las Américas"
+  const entrega = delivery === "delivery" ? `Delivery — ${address}` : "Retiro en Aracena y Monkeberg 864"
   const pago = payment === "efectivo" ? "Efectivo" : "Transferencia"
 
   return [
@@ -349,7 +349,7 @@ export default function CartDrawer({
                   >
                     <Package size={20} />
                     Retiro
-                    <span className="text-xs font-normal opacity-60">Villa Las Américas</span>
+                    <span className="text-xs font-normal opacity-60">Aracena y Monkeberg 864</span>
                   </button>
                   {deliveryEnabled && (
                     <button
@@ -369,7 +369,7 @@ export default function CartDrawer({
                 </div>
                 {!deliveryEnabled && (
                   <p className="text-orange-400/70 text-xs mt-2" style={{ fontFamily: "var(--font-inter)" }}>
-                    Delivery no disponible hoy. Solo retiro en Villa Las Américas.
+                    Delivery no disponible hoy. Solo retiro en Aracena y Monkeberg 864.
                   </p>
                 )}
               </div>

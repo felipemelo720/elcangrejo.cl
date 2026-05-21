@@ -10,7 +10,7 @@ function IgIcon() {
   )
 }
 
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
+const WA = "https://wa.me/56964583021?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
 const IG = "https://www.instagram.com/elcangrejo"
 
 export default function Footer() {
@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2 text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
               <Clock size={14} className="text-primary shrink-0" />
-              Jue – Sáb · 17:30 a 21:30 hrs
+              Lun – Sáb · 16:00 a 00:00 hrs
             </div>
             <div className="flex items-center gap-2 text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
               <MapPin size={14} className="text-primary shrink-0" />
@@ -40,7 +40,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2 text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
               <MapPin size={14} className="text-primary shrink-0" />
-              Retiro: Calle Aracena y Monckenberg #864
+              Retiro: Aracena y Monkeberg 864
             </div>
           </div>
 
@@ -54,7 +54,7 @@ export default function Footer() {
               style={{ fontFamily: "var(--font-inter)" }}
             >
               <MessageCircle size={14} className="text-primary" />
-              +56 9 3135 8884
+              +56 9 6458 3021
             </a>
             <a
               href={IG}

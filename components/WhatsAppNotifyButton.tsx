@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Bell, X, MessageCircle } from "lucide-react"
 
-const WA_NUMBER = "56931358884"
+const WA_NUMBER = "56964583021"
 const MSG = encodeURIComponent("Hola! Avísame cuando El Cangrejo esté abierto 🍜")
 const SUBSCRIBED_KEY = "wa_notify_subscribed"
 const SHOW_DELAY_MS = 2000

@@ -28,7 +28,7 @@ const reasons = [
     iconBg: "#2D0D30",
     iconColor: "#C084FC",
     title: "Trato Directo",
-    desc: "Hablamos contigo, coordinamos a tu medida. Retiro en Aracena #864 o delivery en Paine.",
+    desc: "Hablamos contigo, coordinamos a tu medida. Retiro en Aracena y Monkeberg 864 o delivery en Paine.",
   },
 ]
 

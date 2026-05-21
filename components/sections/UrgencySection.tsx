@@ -2,12 +2,15 @@ import React from "react"
 import { MessageCircle, AlertCircle } from "lucide-react"
 import RevealWrapper from "@/components/RevealWrapper"
 
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
+const WA = "https://wa.me/56964583021?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
 
 const days = [
-  { day: "JUEVES", short: "JUE" },
-  { day: "VIERNES", short: "VIE" },
-  { day: "SÁBADO", short: "SÁB" },
+  { day: "LUNES",     short: "LUN" },
+  { day: "MARTES",    short: "MAR" },
+  { day: "MIÉRCOLES", short: "MIÉ" },
+  { day: "JUEVES",    short: "JUE" },
+  { day: "VIERNES",   short: "VIE" },
+  { day: "SÁBADO",    short: "SÁB" },
 ]
 
 export default function UrgencySection() {
@@ -37,7 +40,7 @@ export default function UrgencySection() {
             className="font-heading text-white leading-none mb-3"
             style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}
           >
-            SOLO <span className="text-primary">3 DÍAS</span>
+            SOLO <span className="text-primary">6 DÍAS</span>
           </h2>
           <p
             className="text-white/30 text-xs tracking-[0.35em] uppercase mb-12"
@@ -65,7 +68,7 @@ export default function UrgencySection() {
 
         <RevealWrapper delay={3}>
           <p className="font-heading text-2xl sm:text-3xl text-white/50 tracking-widest leading-none mb-1">
-            17:30 — 21:30
+            16:00 — 00:00
           </p>
           <p
             className="text-white/20 text-[9px] tracking-[0.3em] uppercase mb-12"

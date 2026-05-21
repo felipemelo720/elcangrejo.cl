@@ -11,17 +11,20 @@ function IgIcon() {
   )
 }
 
-const WA = "https://wa.me/56931358884?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
+const WA = "https://wa.me/56964583021?text=Hola%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%A3"
 const IG = "https://www.instagram.com/elcangrejo"
 
 const days = [
-  { label: "Jueves",  short: "JUE" },
-  { label: "Viernes", short: "VIE" },
-  { label: "Sábado",  short: "SÁB" },
+  { label: "Lunes",     short: "LUN" },
+  { label: "Martes",    short: "MAR" },
+  { label: "Miércoles", short: "MIÉ" },
+  { label: "Jueves",    short: "JUE" },
+  { label: "Viernes",   short: "VIE" },
+  { label: "Sábado",    short: "SÁB" },
 ]
 
 const locations = [
-  { icon: <Package size={12} />, label: "Retiro",   value: "Calle Aracena #864" },
+  { icon: <Package size={12} />, label: "Retiro",   value: "Aracena y Monkeberg 864" },
   { icon: <MapPin   size={12} />, label: "Delivery", value: "Disponible en Paine" },
 ]
 
@@ -121,7 +124,7 @@ export default function CTAFinalSection() {
                         className="text-white/30 text-xs tabular-nums"
                         style={{ fontFamily: "var(--font-inter)" }}
                       >
-                        17:30 – 21:30
+                        16:00 – 00:00
                       </span>
                     </div>
                   ))}
