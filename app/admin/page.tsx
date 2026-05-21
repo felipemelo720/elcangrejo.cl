@@ -3,6 +3,8 @@ import { login, logout, toggleStore, toggleDelivery, getAdminData, getStats } fr
 import StatsChart from "./StatsChart"
 import SoldOutManager from "@/components/admin/SoldOutManager"
 
+export const dynamic = "force-dynamic"
+
 export default async function AdminPage() {
   const jar = await cookies()
   const isAuth = jar.get("admin_session")?.value === "authenticated"
@@ -13,7 +15,7 @@ export default async function AdminPage() {
         <div className="w-full max-w-sm bg-surface border border-white/10 rounded-2xl p-8">
           <h1 className="font-heading text-4xl text-white mb-2">ADMIN</h1>
           <p className="text-white/40 text-sm mb-8" style={{ fontFamily: "var(--font-inter)" }}>
-            Arroz en Wok — Panel de control
+            El Cangrejo — Panel de control
           </p>
           <form action={login} className="space-y-4">
             <input
@@ -37,7 +39,7 @@ export default async function AdminPage() {
     )
   }
 
-  const [{ isOpen, deliveryEnabled, soldOutItems, subscriberCount, waSubscriberCount }, stats] = await Promise.all([
+  const [{ isOpen, deliveryEnabled, soldOutItems }, stats] = await Promise.all([
     getAdminData(),
     getStats(),
   ])
@@ -51,7 +53,7 @@ export default async function AdminPage() {
           <div>
             <h1 className="font-heading text-4xl text-white">ADMIN</h1>
             <p className="text-white/40 text-xs mt-0.5" style={{ fontFamily: "var(--font-inter)" }}>
-              Arroz en Wok
+              El Cangrejo
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -87,10 +89,6 @@ export default async function AdminPage() {
                   {isOpen ? "ABIERTO" : "CERRADO"}
                 </span>
               </div>
-            </div>
-            <div className="text-white/30 text-xs text-right space-y-1" style={{ fontFamily: "var(--font-inter)" }}>
-              <p>{subscriberCount} push · {waSubscriberCount} WA</p>
-              <p>suscriptores</p>
             </div>
           </div>
 

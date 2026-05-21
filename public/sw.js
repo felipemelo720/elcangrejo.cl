@@ -1,6 +1,6 @@
 self.addEventListener("push", function (event) {
   const data = event.data?.json() ?? {}
-  const title = data.title || "Arroz en Wok"
+  const title = data.title || "El Cangrejo"
   const options = {
     body: data.body || "",
     icon: "/logoarrrozenwok.jpg",

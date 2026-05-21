@@ -3,6 +3,7 @@
 import { cookies } from "next/headers"
 import { supabaseServer } from "@/lib/supabase-server"
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 
 const COOKIE = "admin_session"
 
@@ -32,41 +33,65 @@ export async function trackEventServer(type: string, metadata: Record<string, un
 }
 
 export async function toggleStore(isOpen: boolean) {
-  await supabaseServer
+  const { error } = await supabaseServer
     .from("store_status")
-    .upsert({ id: 1, is_open: isOpen, updated_at: new Date().toISOString() })
+    .upsert(
+      { id: 1, is_open: isOpen, updated_at: new Date().toISOString() },
+      { onConflict: "id" }
+    )
+
+  if (error) throw new Error(error.message)
 
   if (isOpen) {
     try { await trackEventServer("store_opened_silent") } catch { /* silent */ }
   }
 
   revalidatePath("/admin")
+  revalidatePath("/")
+  revalidatePath("/api/store/status")
+  redirect("/admin")
 }
 
 export async function toggleDelivery(enabled: boolean) {
-  await supabaseServer
+  const { error } = await supabaseServer
     .from("store_status")
-    .upsert({ id: 1, delivery_enabled: enabled, updated_at: new Date().toISOString() })
+    .upsert(
+      { id: 1, delivery_enabled: enabled, updated_at: new Date().toISOString() },
+      { onConflict: "id" }
+    )
+
+  if (error) throw new Error(error.message)
+
   revalidatePath("/admin")
+  revalidatePath("/")
+  revalidatePath("/api/store/status")
+  redirect("/admin")
 }
 
 export async function toggleSoldOut(itemId: string, soldOut: boolean) {
   const { data } = await supabaseServer
     .from("store_status")
-    .select("sold_out_items")
+    .select("unavailable_items")
     .eq("id", 1)
     .single()
 
-  const current: string[] = (data as { sold_out_items?: string[] } | null)?.sold_out_items ?? []
+  const current: string[] = (data as any)?.unavailable_items ?? []
   const updated = soldOut
     ? [...new Set([...current, itemId])]
-    : current.filter((id) => id !== itemId)
+    : current.filter((id: string) => id !== itemId)
 
-  await supabaseServer
+  const { error } = await supabaseServer
     .from("store_status")
-    .upsert({ id: 1, sold_out_items: updated, updated_at: new Date().toISOString() })
+    .upsert(
+      { id: 1, unavailable_items: updated, updated_at: new Date().toISOString() },
+      { onConflict: "id" }
+    )
+
+  if (error) throw new Error(error.message)
 
   revalidatePath("/admin")
+  revalidatePath("/")
+  revalidatePath("/api/store/status")
 }
 
 export async function sendPush(title: string, body: string) {
@@ -90,22 +115,16 @@ export async function sendPush(title: string, body: string) {
 }
 
 export async function getAdminData() {
-  const [statusRes, pushCountRes, waCountRes] = await Promise.all([
-    supabaseServer.from("store_status").select("is_open, delivery_enabled, sold_out_items").eq("id", 1).single(),
-    supabaseServer.from("push_subscriptions").select("*", { count: "exact", head: true }),
-    supabaseServer.from("whatsapp_subscribers").select("*", { count: "exact", head: true }),
-  ])
-
-  const statusData = statusRes.error
-    ? (await supabaseServer.from("store_status").select("is_open").eq("id", 1).single()).data
-    : statusRes.data
+  const { data: statusData } = await supabaseServer
+    .from("store_status")
+    .select("is_open, delivery_enabled, unavailable_items")
+    .eq("id", 1)
+    .single()
 
   return {
     isOpen: statusData?.is_open ?? false,
-    deliveryEnabled: (statusData as { delivery_enabled?: boolean } | null)?.delivery_enabled ?? true,
-    soldOutItems: (statusData as { sold_out_items?: string[] } | null)?.sold_out_items ?? [],
-    subscriberCount: pushCountRes.count ?? 0,
-    waSubscriberCount: waCountRes.count ?? 0,
+    deliveryEnabled: (statusData as any)?.delivery_enabled ?? true,
+    soldOutItems: (statusData as any)?.unavailable_items ?? [],
   }
 }
 

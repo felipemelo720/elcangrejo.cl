@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Bell, X, MessageCircle } from "lucide-react"
 
 const WA_NUMBER = "56931358884"
-const MSG = encodeURIComponent("Hola! Avísame cuando Arroz en Wok esté abierto 🍜")
+const MSG = encodeURIComponent("Hola! Avísame cuando El Cangrejo esté abierto 🍜")
 const SUBSCRIBED_KEY = "wa_notify_subscribed"
 const SHOW_DELAY_MS = 2000
 
@@ -84,7 +84,7 @@ export default function WhatsAppNotifyButton() {
           className="text-white/45 text-sm leading-relaxed mb-6"
           style={{ fontFamily: "var(--font-inter)" }}
         >
-          Mándanos un mensaje por WhatsApp y te avisamos cada vez que Arroz en Wok abra — sin apps, sin correos.
+          Mándanos un mensaje por WhatsApp y te avisamos cada vez que El Cangrejo abra — sin apps, sin correos.
         </p>
 
         {/* CTA */}

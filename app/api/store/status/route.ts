@@ -5,14 +5,14 @@ import { cookies } from "next/headers"
 export async function GET() {
   const { data } = await supabaseServer
     .from("store_status")
-    .select("is_open, delivery_enabled, sold_out_items")
+    .select("is_open, delivery_enabled, unavailable_items")
     .eq("id", 1)
     .single()
 
   return NextResponse.json({
     is_open: data?.is_open ?? false,
     delivery_enabled: (data as { delivery_enabled?: boolean } | null)?.delivery_enabled ?? true,
-    sold_out_items: (data as { sold_out_items?: string[] } | null)?.sold_out_items ?? [],
+    sold_out_items: (data as { unavailable_items?: string[] } | null)?.unavailable_items ?? [],
   })
 }
 

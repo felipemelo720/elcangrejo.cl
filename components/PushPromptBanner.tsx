@@ -107,7 +107,7 @@ export default function PushPromptBanner() {
                 ¡Listo!
               </p>
               <p className="text-white/40 text-xs mt-0.5 leading-relaxed" style={{ fontFamily: "var(--font-inter)" }}>
-                Te avisaremos cuando Arroz en Wok abra.
+                Te avisaremos cuando El Cangrejo abra.
               </p>
             </>
           ) : (
@@ -116,7 +116,7 @@ export default function PushPromptBanner() {
                 Avísame cuando abran
               </p>
               <p className="text-white/40 text-xs mt-0.5 leading-relaxed" style={{ fontFamily: "var(--font-inter)" }}>
-                Recibe una notificación cada vez que Arroz en Wok abre.
+                Recibe una notificación cada vez que El Cangrejo abre.
               </p>
               {state === "denied" && (
                 <p className="text-red-400 text-xs mt-1" style={{ fontFamily: "var(--font-inter)" }}>
