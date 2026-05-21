@@ -4,19 +4,19 @@ import RevealWrapper from "@/components/RevealWrapper"
 const steps = [
   {
     number: "01",
-    icon: <ShoppingCart size={26} />,
+    icon: <ShoppingCart size={18} />,
     title: "Elige del menú",
     desc: "Navega el menú, elige tu box, proteína y extras. Agrega todo al carrito desde acá — sin apps ni registro.",
   },
   {
     number: "02",
-    icon: <CheckCircle size={26} />,
+    icon: <CheckCircle size={18} />,
     title: "Confirma tu pedido",
     desc: "Ingresa tu nombre, elige retiro o delivery, y el método de pago. Se arma el mensaje automáticamente.",
   },
   {
     number: "03",
-    icon: <Package size={26} />,
+    icon: <Package size={18} />,
     title: "Retira o recibe",
     desc: "Te enviamos tu pedido por WhatsApp y lo coordinamos. Listo en Villa Las Américas o en tu puerta en Paine.",
   },
@@ -25,51 +25,75 @@ const steps = [
 export default function HowToOrderSection() {
   return (
     <section id="como-pedir" className="bg-surface py-24 px-4 sm:px-6 border-y border-white/5">
-      <div className="max-w-5xl mx-auto">
-        <RevealWrapper className="text-center mb-16">
-          <h2 className="font-heading text-white" style={{ fontSize: "clamp(2.8rem, 7vw, 5rem)" }}>
-            ¿CÓMO <span className="text-primary">PEDIR?</span>
-          </h2>
-          <p className="text-white/40 mt-2 text-base" style={{ fontFamily: "var(--font-inter)" }}>
-            3 pasos. Sin vueltas.
-          </p>
-        </RevealWrapper>
+      <div className="max-w-md mx-auto">
+        <RevealWrapper>
+          <div className="bg-card border border-white/12 rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Connector line on desktop */}
-          <div className="hidden md:block absolute top-12 left-[calc(33%-1px)] right-[calc(33%-1px)] h-px bg-white/10" />
+            {/* Header */}
+            <div className="px-7 pt-7 pb-6 text-center border-b border-dashed border-white/15">
+              <div
+                className="flex items-center justify-center gap-3 text-white/22 text-[9px] uppercase tracking-[0.28em] mb-3"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                <span className="flex-1 h-px bg-white/12" />
+                proceso de pedido
+                <span className="flex-1 h-px bg-white/12" />
+              </div>
+              <h2 className="font-heading text-white" style={{ fontSize: "clamp(2rem, 6vw, 2.8rem)" }}>
+                ¿CÓMO PEDIR?
+              </h2>
+              <p className="text-white/30 text-xs mt-1" style={{ fontFamily: "var(--font-inter)" }}>
+                3 pasos · sin vueltas
+              </p>
+            </div>
 
-          {steps.map((step, i) => (
-            <RevealWrapper key={step.number} delay={(i + 1) as 1 | 2 | 3}>
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="relative">
-                  <div className="w-24 h-24 rounded-2xl bg-card border border-white/10 flex items-center justify-center text-primary">
+            {/* Steps */}
+            {steps.map((step, i) => (
+              <div
+                key={step.number}
+                className={`flex items-start gap-4 px-7 py-5 ${i < steps.length - 1 ? "border-b border-dashed border-white/10" : ""}`}
+              >
+                <span
+                  className="font-heading leading-none text-white/8 select-none shrink-0"
+                  style={{ fontSize: "3.5rem" }}
+                >
+                  {step.number}
+                </span>
+                <div className="flex items-start gap-3 pt-1.5">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 text-primary bg-primary/10">
                     {step.icon}
                   </div>
-                  <span
-                    className="absolute -top-3 -right-3 font-heading text-4xl leading-none"
-                    style={{ color: "rgba(227,30,36,0.25)" }}
-                  >
-                    {step.number}
-                  </span>
+                  <div>
+                    <p className="font-heading text-lg text-white leading-tight">{step.title}</p>
+                    <p
+                      className="text-white/38 text-xs mt-1.5 leading-relaxed"
+                      style={{ fontFamily: "var(--font-inter)" }}
+                    >
+                      {step.desc}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="font-heading text-2xl text-white">{step.title}</h3>
-                <p className="text-white/45 text-sm leading-relaxed max-w-xs" style={{ fontFamily: "var(--font-inter)" }}>
-                  {step.desc}
-                </p>
               </div>
-            </RevealWrapper>
-          ))}
-        </div>
+            ))}
 
-        <RevealWrapper delay={4} className="text-center mt-14">
-          <a
-            href="#menu"
-            className="inline-flex items-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-lg px-9 py-4 rounded-full transition-colors duration-200 animate-glow"
-          >
-            <ShoppingCart size={20} />
-            Armar mi Pedido
-          </a>
+            {/* Footer CTA */}
+            <div className="px-7 py-6 border-t border-dashed border-white/12 bg-white/[0.015] flex flex-col items-center gap-4">
+              <p
+                className="text-white/18 text-[9px] uppercase tracking-[0.25em]"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                Sin apps · Sin registro · Solo WhatsApp
+              </p>
+              <a
+                href="#menu"
+                className="w-full inline-flex items-center justify-center gap-2.5 bg-primary hover:bg-primary-dark text-white font-bold text-base px-8 py-4 rounded-2xl transition-colors duration-200 animate-glow shadow-lg shadow-primary/25"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                <ShoppingCart size={18} />
+                Armar mi Pedido
+              </a>
+            </div>
+          </div>
         </RevealWrapper>
       </div>
     </section>

@@ -1,167 +1,148 @@
 import { UtensilsCrossed, ChevronDown, MapPin, Clock, Star } from "lucide-react"
 
 const pills = [
-  { icon: <MapPin size={14} />, text: "Delivery en Paine" },
-  { icon: <MapPin size={14} />, text: "Retiro Calle Aracena #864" },
-  { icon: <Clock size={14} />, text: "17:30 – 21:30 hrs" },
+  { icon: <MapPin size={13} />, text: "Delivery en Paine" },
+  { icon: <MapPin size={13} />, text: "Retiro Calle Aracena #864" },
+  { icon: <Clock size={13} />, text: "17:30 – 21:30 hrs" },
 ]
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-bg">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-bg px-4 sm:px-6">
+
       {/* Background glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="animate-drift absolute top-[-10%] left-1/4 w-[900px] h-[600px] rounded-full blur-[140px]"
-          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.22) 0%, transparent 70%)" }}
+          className="animate-drift absolute top-[-5%] left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[140px]"
+          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.18) 0%, transparent 70%)" }}
         />
         <div
           className="animate-drift2 absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px]"
-          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.12) 0%, transparent 70%)" }}
+          style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.10) 0%, transparent 70%)" }}
         />
         <div
-          className="animate-drift absolute top-1/2 left-[-10%] w-[400px] h-[400px] rounded-full blur-[100px]"
-          style={{ background: "radial-gradient(ellipse, rgba(245,158,11,0.06) 0%, transparent 70%)", animationDelay: "-6s" }}
+          className="animate-drift absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[100px]"
+          style={{ background: "radial-gradient(ellipse, rgba(245,158,11,0.05) 0%, transparent 70%)", animationDelay: "-6s" }}
         />
       </div>
 
       {/* Dot grid */}
       <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none"
+        className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: "radial-gradient(circle, #fff 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
 
-      {/* Edge accent */}
-      <div className="absolute top-0 right-0 w-1 h-full bg-gradient-to-b from-primary via-primary/30 to-transparent" />
+      {/* Main content — centered */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto text-center pt-28 pb-20">
 
-      {/* Grid layout: text left, visual right */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 lg:pt-32 lg:pb-24 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-16">
-
-        {/* LEFT — copy */}
-        <div className="text-center lg:text-left">
-
-          {/* Schedule badge */}
-          <div className="inline-flex items-center gap-2.5 bg-white/5 border border-primary/30 text-white/90 text-sm font-semibold px-5 py-2.5 rounded-full mb-8 animate-float">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            JUE · VIE · SÁB &nbsp;—&nbsp; 17:30 a 21:30 HRS
-          </div>
-
-          {/* Headline */}
-          <h1 className="font-heading leading-none text-white mb-4">
-            <span className="block" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>SUSHI</span>
-            <span className="block text-gradient-animate" style={{ fontSize: "clamp(4rem, 13vw, 10rem)" }}>&amp; CEVICHES</span>
-            <span className="block text-white/65" style={{ fontSize: "clamp(1.6rem, 5vw, 3.8rem)" }}>
-              EN TU PUERTA · PAINE
-            </span>
-          </h1>
-
-          {/* Desc */}
-          <p
-            className="text-white/55 text-lg sm:text-xl max-w-lg mx-auto lg:mx-0 mt-4 mb-6 leading-relaxed"
-            style={{ fontFamily: "var(--font-inter)" }}
-          >
-            Han Rolls, Gohan, Piezas Mixtas y Empanadas preparados al momento.
-            Sin apps de delivery — solo WhatsApp, precio directo.
-          </p>
-
-          {/* Social proof */}
-          <div className="flex items-center gap-2.5 justify-center lg:justify-start mb-8">
-            <div className="flex">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <Star key={i} size={15} className="text-accent fill-accent" />
-              ))}
-            </div>
-            <span
-              className="text-white/50 text-sm"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              +150 pedidos en Paine
-            </span>
-          </div>
-
-          {/* CTAs */}
-          <div className="flex flex-col gap-3 justify-center lg:justify-start items-center lg:items-start">
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <a
-                href="#menu"
-                className="animate-glow group relative inline-flex items-center gap-3 bg-primary text-white font-bold text-base px-7 py-4 rounded-2xl transition-all duration-200 w-full sm:w-auto justify-center overflow-hidden shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98]"
-                style={{ fontFamily: "var(--font-inter)" }}
-              >
-                <span className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <UtensilsCrossed size={20} />
-                <span>Armar mi Pedido</span>
-                <span className="text-white/60 font-normal text-sm">· desde $3.000</span>
-              </a>
-              <a
-                href="#como-pedir"
-                className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-white/70 hover:text-white font-semibold text-base px-7 py-4 rounded-2xl transition-all duration-200 w-full sm:w-auto justify-center"
-                style={{ fontFamily: "var(--font-inter)" }}
-              >
-                ¿Cómo pedir?
-                <ChevronDown size={16} className="opacity-60" />
-              </a>
-            </div>
-          </div>
-
-          {/* Location + hours pills */}
-          <div className="flex flex-wrap gap-3 justify-center lg:justify-start mt-10">
-            {pills.map((item) => (
-              <div
-                key={item.text}
-                className="flex items-center gap-2 bg-white/5 border border-white/10 text-white/55 text-sm px-4 py-2 rounded-full"
-              >
-                <span className="text-primary">{item.icon}</span>
-                {item.text}
-              </div>
-            ))}
-          </div>
+        {/* Schedule badge */}
+        <div
+          className="inline-flex items-center gap-2.5 bg-white/5 border border-primary/30 text-white/80 text-xs font-semibold px-5 py-2 rounded-full mb-12 animate-float tracking-widest"
+          style={{ fontFamily: "var(--font-inter)" }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+          JUE · VIE · SÁB &nbsp;—&nbsp; 17:30 a 21:30 HRS
         </div>
 
-        {/* RIGHT — visual card */}
-        <div className="flex items-center justify-center">
-          <div className="relative w-full max-w-[440px]">
-            <div
-              className="absolute inset-0 rounded-3xl blur-3xl scale-90 opacity-70"
-              style={{ background: "radial-gradient(ellipse, rgba(232,93,74,0.40) 0%, transparent 65%)" }}
-            />
+        {/* Headline */}
+        <h1 className="font-heading leading-none text-white">
 
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl aspect-[4/5] bg-gradient-to-br from-[#1a0a08] to-[#0a0a0a] flex flex-col items-center justify-center gap-6 p-8">
-              <span className="text-[8rem] leading-none select-none">🍣</span>
-              <div className="text-center">
-                <p className="font-heading text-4xl text-white leading-none mb-1">EL CANGREJO</p>
-                <p className="text-white/40 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
-                  Sushi &amp; Ceviches · Paine
-                </p>
-              </div>
+          {/* SUSHI — full bleed */}
+          <span
+            className="block"
+            style={{ fontSize: "clamp(5rem, 22vw, 17rem)", letterSpacing: "-0.02em" }}
+          >
+            SUSHI
+          </span>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
-
-              <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-4 flex items-center justify-between">
-                <div>
-                  <p className="text-white/50 text-xs mb-0.5" style={{ fontFamily: "var(--font-inter)" }}>Desde</p>
-                  <p className="font-heading text-3xl text-white leading-none">$3.000</p>
-                </div>
-                <div className="h-8 w-px bg-white/15" />
-                <div className="text-right">
-                  <p className="text-white/50 text-xs mb-0.5" style={{ fontFamily: "var(--font-inter)" }}>Disponible</p>
-                  <p className="font-heading text-lg text-white leading-none">JUE · VIE · SÁB</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -top-3 -right-2 lg:-right-5 bg-accent text-black font-bold text-xs sm:text-sm px-4 py-2 rounded-full shadow-xl rotate-3 whitespace-nowrap">
-              🦀 SUSHI & CEVICHES
-            </div>
+          {/* Divider row */}
+          <div className="flex items-center justify-center gap-4 sm:gap-6 my-3 sm:my-4">
+            <span className="flex-1 max-w-[100px] sm:max-w-[180px] h-px bg-white/10" />
+            <span
+              className="text-white/30 text-[9px] sm:text-[10px] tracking-[0.35em] uppercase whitespace-nowrap"
+              style={{ fontFamily: "var(--font-inter)" }}
+            >
+              en tu puerta · Paine
+            </span>
+            <span className="flex-1 max-w-[100px] sm:max-w-[180px] h-px bg-white/10" />
           </div>
+
+          {/* & CEVICHES — gradient, smaller */}
+          <span
+            className="block text-gradient-animate"
+            style={{ fontSize: "clamp(3rem, 11vw, 8.5rem)", letterSpacing: "-0.01em" }}
+          >
+            &amp; CEVICHES
+          </span>
+        </h1>
+
+        {/* Desc */}
+        <p
+          className="text-white/45 text-base sm:text-lg max-w-sm mx-auto mt-8 mb-6 leading-relaxed"
+          style={{ fontFamily: "var(--font-inter)" }}
+        >
+          Han Rolls, Gohan, Piezas Mixtas y Empanadas al momento.
+          Sin apps — solo WhatsApp, precio directo.
+        </p>
+
+        {/* Social proof */}
+        <div className="flex items-center gap-2 justify-center mb-8">
+          <div className="flex">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <Star key={i} size={13} className="text-accent fill-accent" />
+            ))}
+          </div>
+          <span
+            className="text-white/40 text-sm"
+            style={{ fontFamily: "var(--font-inter)" }}
+          >
+            +50 clientes felices en Paine
+          </span>
+        </div>
+
+        {/* CTAs */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-10">
+          <a
+            href="#menu"
+            className="animate-glow group relative inline-flex items-center gap-3 bg-primary text-white font-bold text-base px-8 py-4 rounded-2xl transition-all duration-200 w-full sm:w-auto justify-center overflow-hidden shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-[1.02] active:scale-[0.98]"
+            style={{ fontFamily: "var(--font-inter)" }}
+          >
+            <span className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <UtensilsCrossed size={18} />
+            <span>Armar mi Pedido</span>
+            <span className="text-white/55 font-normal text-sm">· desde $3.000</span>
+          </a>
+          <a
+            href="#como-pedir"
+            className="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-white/65 hover:text-white font-semibold text-base px-7 py-4 rounded-2xl transition-all duration-200 w-full sm:w-auto justify-center"
+            style={{ fontFamily: "var(--font-inter)" }}
+          >
+            ¿Cómo pedir?
+            <ChevronDown size={15} className="opacity-50" />
+          </a>
+        </div>
+
+        {/* Pills */}
+        <div className="flex flex-wrap gap-2 justify-center">
+          {pills.map((item) => (
+            <div
+              key={item.text}
+              className="flex items-center gap-1.5 bg-white/[0.04] border border-white/8 text-white/40 text-xs px-3.5 py-1.5 rounded-full"
+            >
+              <span className="text-primary/70">{item.icon}</span>
+              {item.text}
+            </div>
+          ))}
         </div>
       </div>
 
+
       {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/30 animate-bounce">
-        <ChevronDown size={26} />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/20 animate-bounce">
+        <ChevronDown size={24} />
       </div>
     </section>
   )
