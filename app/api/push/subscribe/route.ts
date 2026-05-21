@@ -1,4 +1,4 @@
-import { supabaseServer } from "@/lib/supabase-server"
+import { db } from "@/lib/db"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(req: NextRequest) {
@@ -9,9 +9,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid subscription" }, { status: 400 })
   }
 
-  await supabaseServer
-    .from("push_subscriptions")
-    .upsert({ endpoint, p256dh: keys.p256dh, auth: keys.auth })
+  await db().execute({
+    sql: `INSERT INTO push_subscriptions (endpoint, p256dh, auth, created_at) VALUES (?, ?, ?, ?)
+          ON CONFLICT(endpoint) DO UPDATE SET p256dh = excluded.p256dh, auth = excluded.auth`,
+    args: [endpoint, keys.p256dh, keys.auth, new Date().toISOString()],
+  })
 
   return NextResponse.json({ ok: true })
 }

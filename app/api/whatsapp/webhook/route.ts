@@ -1,4 +1,4 @@
-import { supabaseServer } from "@/lib/supabase-server"
+import { db } from "@/lib/db"
 import { NextRequest, NextResponse } from "next/server"
 import { trackEventServer } from "@/app/admin/actions"
 
@@ -26,7 +26,10 @@ export async function POST(req: NextRequest) {
       const phone = msg.from as string | undefined
       if (!phone) continue
       await Promise.all([
-        supabaseServer.from("whatsapp_subscribers").upsert({ phone }, { onConflict: "phone" }),
+        db().execute({
+          sql: "INSERT INTO whatsapp_subscribers (phone, created_at) VALUES (?, ?) ON CONFLICT(phone) DO NOTHING",
+          args: [phone, new Date().toISOString()],
+        }),
         trackEventServer("wa_order_received", { phone }),
       ])
     }
