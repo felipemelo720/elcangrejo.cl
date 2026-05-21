@@ -11,9 +11,13 @@ function formatCLP(n: number): string {
 }
 
 const EXTRAS = [
-  { id: "Gyoza",     name: "Gyoza",     emoji: "🥟", price: 3500, priceLabel: "$3.500" },
-  { id: "Edamame",   name: "Edamame",   emoji: "🫛", price: 2500, priceLabel: "$2.500" },
-  { id: "Miso Soup", name: "Miso Soup", emoji: "🍜", price: 2000, priceLabel: "$2.000" },
+  { id: "papas-chica",          name: "Papas Fritas",       desc: "Porción chica",   emoji: "🍟", price: 2000,  priceLabel: "$2.000" },
+  { id: "papas-grande",         name: "Papas Fritas",       desc: "Porción grande",  emoji: "🍟", price: 4000,  priceLabel: "$4.000" },
+  { id: "papas-familiar",       name: "Papas Fritas Fam.",  desc: "Para compartir",  emoji: "🍟", price: 8000,  priceLabel: "$8.000",  badge: "FAMILIAR" },
+  { id: "pollo-crispy-porcion", name: "Pollo Crispy + Papas", desc: "Porción",       emoji: "🍗", price: 5000,  priceLabel: "$5.000" },
+  { id: "pollo-crispy-doble",   name: "Pollo Crispy + Papas", desc: "Porción doble", emoji: "🍗", price: 10000, priceLabel: "$10.000", badge: "DOBLE" },
+  { id: "arrollado-primavera",  name: "Arrollado Primavera",  desc: "5 unidades",    emoji: "🥢", price: 3500,  priceLabel: "$3.500" },
+  { id: "arrollado-jamon-queso",name: "Arrollado Jamón Queso",desc: "5 unidades",    emoji: "🥢", price: 3500,  priceLabel: "$3.500" },
 ]
 
 type DeliveryType = "retiro" | "delivery" | null
@@ -54,7 +58,7 @@ export default function CartDrawer({
 }) {
   const { items, add, increment, decrement, clear, total, count } = useCart()
 
-  const [step, setStep] = useState<"cart" | "checkout">("cart")
+  const [step, setStep] = useState<"cart" | "extras" | "checkout">("cart")
   const [name, setName] = useState("")
   const [delivery, setDelivery] = useState<DeliveryType>(null)
   const [address, setAddress] = useState("")
@@ -72,7 +76,7 @@ export default function CartDrawer({
     (delivery === "retiro" || address.trim().length > 0)
 
   function handleClose() {
-    if (items.length > 0 && step === "checkout") {
+    if (items.length > 0 && (step === "checkout" || step === "extras")) {
       fetch("/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -114,9 +118,9 @@ export default function CartDrawer({
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-white/10 shrink-0">
           <div className="flex items-center gap-3">
-            {step === "checkout" && (
+            {(step === "extras" || step === "checkout") && (
               <button
-                onClick={() => setStep("cart")}
+                onClick={() => setStep(step === "checkout" ? "extras" : "cart")}
                 className="text-white/40 hover:text-white transition-colors p-1"
                 aria-label="Volver"
               >
@@ -125,11 +129,13 @@ export default function CartDrawer({
             )}
             <div>
               <h2 className="font-heading text-2xl text-white">
-                {step === "cart" ? "TU PEDIDO" : "CONFIRMAR"}
+                {step === "cart" ? "TU PEDIDO" : step === "extras" ? "EXTRAS" : "CONFIRMAR"}
               </h2>
               <p className="text-white/40 text-xs mt-0.5" style={{ fontFamily: "var(--font-inter)" }}>
                 {step === "cart"
                   ? `${count} ${count === 1 ? "item" : "items"}`
+                  : step === "extras"
+                  ? "Agrega lo que quieras"
                   : "Completa los datos"}
               </p>
             </div>
@@ -197,57 +203,116 @@ export default function CartDrawer({
               )}
             </div>
 
-            {items.length > 0 && (() => {
-              const hasExtra = items.some((i) => EXTRAS.some((e) => e.id === i.id))
-              return (
-                <div className="shrink-0 space-y-0">
-                  {/* Extras upsell */}
-                  {!hasExtra && (
-                    <div className="px-4 pt-3 pb-2 border-t border-white/10">
-                      <p className="text-white/40 text-xs uppercase tracking-widest mb-2" style={{ fontFamily: "var(--font-inter)" }}>
-                        ¿Le agregamos algo?
-                      </p>
-                      <div className="flex gap-2">
-                        {EXTRAS.map((ex) => (
-                          <button
-                            key={ex.id}
-                            onClick={() => add({ id: ex.id, name: ex.name, price: ex.price, priceLabel: ex.priceLabel })}
-                            className="flex-1 flex items-center gap-2 bg-card border border-white/10 hover:border-primary/50 hover:bg-primary/10 rounded-xl px-3 py-2.5 transition-all text-left"
-                          >
-                            <span className="text-xl">{ex.emoji}</span>
-                            <div>
-                              <p className="text-white text-xs font-semibold leading-tight" style={{ fontFamily: "var(--font-inter)" }}>{ex.name}</p>
-                              <p className="text-white/40 text-xs" style={{ fontFamily: "var(--font-inter)" }}>{ex.priceLabel}</p>
-                            </div>
-                            <Plus size={14} className="ml-auto text-white/30 shrink-0" />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Total + continue */}
-                  <div className="p-5 border-t border-white/10 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>Total</span>
-                      <span className="font-heading text-3xl text-accent">{formatCLP(total)}</span>
-                    </div>
-                    <button
-                      onClick={() => setStep("checkout")}
-                      className="w-full inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-base px-6 py-4 rounded-2xl transition-colors duration-200 animate-glow"
-                      style={{ fontFamily: "var(--font-inter)" }}
-                    >
-                      Continuar
-                      <ChevronRight size={18} />
-                    </button>
+            {items.length > 0 && (
+              <div className="shrink-0">
+                <div className="p-5 border-t border-white/10 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>Total</span>
+                    <span className="font-heading text-3xl text-accent">{formatCLP(total)}</span>
                   </div>
+                  <button
+                    onClick={() => setStep("extras")}
+                    className="w-full inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-base px-6 py-4 rounded-2xl transition-colors duration-200 animate-glow"
+                    style={{ fontFamily: "var(--font-inter)" }}
+                  >
+                    Continuar
+                    <ChevronRight size={18} />
+                  </button>
                 </div>
-              )
-            })()}
+              </div>
+            )}
           </>
         )}
 
-        {/* ── STEP 2: Checkout ── */}
+        {/* ── STEP 2: Extras ── */}
+        {step === "extras" && (
+          <>
+            <div className="flex-1 overflow-y-auto p-4 space-y-2">
+              <p className="text-white/35 text-xs mb-3" style={{ fontFamily: "var(--font-inter)" }}>
+                Suma papas, pollo crispy o arrollados a tu pedido.
+              </p>
+              {EXTRAS.map((ex) => {
+                const inCart = items.find((i) => i.id === ex.id)
+                const qty = inCart?.qty ?? 0
+                const selected = qty > 0
+                return (
+                  <div
+                    key={ex.id}
+                    className={`relative flex items-center gap-3 rounded-xl px-4 py-3 border transition-all duration-150 ${
+                      selected
+                        ? "bg-primary/10 border-primary/50"
+                        : "bg-card border-white/8"
+                    }`}
+                  >
+                    {ex.badge && (
+                      <span className="absolute top-2 right-2 bg-accent text-black text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                        {ex.badge}
+                      </span>
+                    )}
+
+                    <span className="text-2xl leading-none shrink-0">{ex.emoji}</span>
+
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white text-sm font-semibold leading-tight truncate" style={{ fontFamily: "var(--font-inter)" }}>
+                        {ex.name}
+                      </p>
+                      <p className="text-white/35 text-xs truncate" style={{ fontFamily: "var(--font-inter)" }}>
+                        {ex.desc}
+                      </p>
+                      <p className={`text-xs font-bold mt-0.5 ${selected ? "text-primary" : "text-white/50"}`} style={{ fontFamily: "var(--font-inter)" }}>
+                        {ex.priceLabel}
+                      </p>
+                    </div>
+
+                    {selected ? (
+                      <div className="flex items-center gap-2 shrink-0">
+                        <button
+                          onClick={() => decrement(ex.id)}
+                          className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-white/70 hover:text-white transition-all"
+                        >
+                          <Minus size={13} />
+                        </button>
+                        <span className="font-heading text-lg text-white w-4 text-center">{qty}</span>
+                        <button
+                          onClick={() => increment(ex.id)}
+                          className="w-7 h-7 rounded-full bg-primary/25 hover:bg-primary border border-primary/40 hover:border-primary flex items-center justify-center text-primary hover:text-white transition-all"
+                        >
+                          <Plus size={13} />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => add({ id: ex.id, name: `${ex.name} (${ex.desc})`, price: ex.price, priceLabel: ex.priceLabel })}
+                        className="shrink-0 inline-flex items-center gap-1 bg-white/8 hover:bg-primary border border-white/15 hover:border-primary text-white/60 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-full transition-all"
+                        style={{ fontFamily: "var(--font-inter)" }}
+                      >
+                        <Plus size={11} />
+                        Agregar
+                      </button>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+
+            <div className="shrink-0 p-5 border-t border-white/10 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-white/50 text-sm" style={{ fontFamily: "var(--font-inter)" }}>Total</span>
+                <span className="font-heading text-3xl text-accent">{formatCLP(total)}</span>
+              </div>
+              <button
+                onClick={() => setStep("checkout")}
+                className="w-full inline-flex items-center justify-center gap-3 bg-primary hover:bg-primary-dark text-white font-bold text-base px-6 py-4 rounded-2xl transition-colors duration-200 animate-glow"
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                Confirmar Pedido
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* ── STEP 3: Checkout ── */}
         {step === "checkout" && (
           <>
             <div className="flex-1 overflow-y-auto p-5 space-y-6">

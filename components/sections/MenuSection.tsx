@@ -67,35 +67,43 @@ function PiezasRow({ item, soldOut }: { item: MenuItem; soldOut: boolean }) {
 
       {/* Info */}
       <div className="flex-1 min-w-0 pt-0.5">
-        <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="font-heading text-base sm:text-lg text-white leading-tight">{item.name}</h3>
-          {item.badge && !soldOut && (
-            <span
-              className={`text-[9px] font-bold px-2 py-0.5 rounded-full border ${
-                item.badge === "POPULAR"
-                  ? "bg-accent/12 text-accent border-accent/30"
-                  : "bg-primary/12 text-primary/80 border-primary/30"
-              }`}
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              {item.badge}
-            </span>
-          )}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="font-heading text-base sm:text-lg text-white leading-tight">{item.name}</h3>
+              {item.badge && !soldOut && (
+                <span
+                  className={`text-[9px] font-bold px-2 py-0.5 rounded-full border ${
+                    item.badge === "POPULAR"
+                      ? "bg-accent/12 text-accent border-accent/30"
+                      : "bg-primary/12 text-primary/80 border-primary/30"
+                  }`}
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  {item.badge}
+                </span>
+              )}
+            </div>
+            {item.desc && (
+              <p className="text-white/40 text-xs mt-1 leading-relaxed" style={{ fontFamily: "var(--font-inter)" }}>
+                {item.desc}
+              </p>
+            )}
+            <p className={`text-[10px] mt-1.5 tabular-nums ${soldOut ? "text-white/15" : "text-white/22"}`} style={{ fontFamily: "var(--font-inter)" }}>
+              ~${perPiece.toLocaleString("es-CL")} / pz
+            </p>
+          </div>
+          {/* Price + add: right on sm+, hidden on mobile */}
+          <div className="hidden sm:flex shrink-0 flex-col items-end gap-2 pt-0.5">
+            <span className={`font-heading text-xl leading-none ${soldOut ? "text-white/25" : "text-primary"}`}>{item.price}</span>
+            <AddBtn item={item} soldOut={soldOut} />
+          </div>
         </div>
-        {item.desc && (
-          <p className="text-white/40 text-xs mt-1 leading-relaxed line-clamp-2" style={{ fontFamily: "var(--font-inter)" }}>
-            {item.desc}
-          </p>
-        )}
-        <p className={`text-[10px] mt-1.5 tabular-nums ${soldOut ? "text-white/15" : "text-white/22"}`} style={{ fontFamily: "var(--font-inter)" }}>
-          ~${perPiece.toLocaleString("es-CL")} / pz
-        </p>
-      </div>
-
-      {/* Price + add */}
-      <div className="shrink-0 flex flex-col items-end gap-2 pt-0.5">
-        <span className={`font-heading text-xl leading-none ${soldOut ? "text-white/25" : "text-primary"}`}>{item.price}</span>
-        <AddBtn item={item} soldOut={soldOut} />
+        {/* Price + add: below desc on mobile */}
+        <div className="flex sm:hidden items-center justify-between mt-3">
+          <span className={`font-heading text-xl leading-none ${soldOut ? "text-white/25" : "text-primary"}`}>{item.price}</span>
+          <AddBtn item={item} soldOut={soldOut} />
+        </div>
       </div>
     </div>
   )
@@ -103,28 +111,38 @@ function PiezasRow({ item, soldOut }: { item: MenuItem; soldOut: boolean }) {
 
 function StandardRow({ item, soldOut }: { item: MenuItem; soldOut: boolean }) {
   return (
-    <div className={`flex items-center gap-4 px-5 py-4 transition-colors ${soldOut ? "opacity-50" : "hover:bg-white/[0.025]"}`}>
+    <div className={`flex items-start gap-4 px-5 py-4 transition-colors ${soldOut ? "opacity-50" : "hover:bg-white/[0.025]"}`}>
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="font-heading text-base sm:text-lg text-white leading-tight">{item.name}</h3>
-          {item.badge && !soldOut && (
-            <span
-              className="text-[9px] font-bold px-2 py-0.5 rounded-full border bg-accent/12 text-accent border-accent/30"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              {item.badge}
-            </span>
-          )}
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="font-heading text-base sm:text-lg text-white leading-tight">{item.name}</h3>
+              {item.badge && !soldOut && (
+                <span
+                  className="text-[9px] font-bold px-2 py-0.5 rounded-full border bg-accent/12 text-accent border-accent/30"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  {item.badge}
+                </span>
+              )}
+            </div>
+            {item.desc && (
+              <p className="text-white/40 text-xs mt-1 leading-relaxed" style={{ fontFamily: "var(--font-inter)" }}>
+                {item.desc}
+              </p>
+            )}
+          </div>
+          {/* Price + add: right on sm+ */}
+          <div className="hidden sm:flex shrink-0 flex-col items-end gap-2">
+            <span className={`font-heading text-xl leading-none ${soldOut ? "text-white/25" : "text-primary"}`}>{item.price}</span>
+            <AddBtn item={item} soldOut={soldOut} />
+          </div>
         </div>
-        {item.desc && (
-          <p className="text-white/40 text-xs mt-1 leading-relaxed" style={{ fontFamily: "var(--font-inter)" }}>
-            {item.desc}
-          </p>
-        )}
-      </div>
-      <div className="shrink-0 flex flex-col items-end gap-2">
-        <span className={`font-heading text-xl leading-none ${soldOut ? "text-white/25" : "text-primary"}`}>{item.price}</span>
-        <AddBtn item={item} soldOut={soldOut} />
+        {/* Price + add: below desc on mobile */}
+        <div className="flex sm:hidden items-center justify-between mt-3">
+          <span className={`font-heading text-xl leading-none ${soldOut ? "text-white/25" : "text-primary"}`}>{item.price}</span>
+          <AddBtn item={item} soldOut={soldOut} />
+        </div>
       </div>
     </div>
   )

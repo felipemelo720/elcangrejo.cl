@@ -105,9 +105,9 @@ export const empanadas: MenuItem[] = [
 export type CategoryKey = "gohan" | "hanroll" | "piezas" | "snacks" | "empanadas"
 
 export const categories: { key: CategoryKey; label: string; emoji: string; items: MenuItem[] }[] = [
+  { key: "piezas", label: "Piezas Mixtas", emoji: "🎁", items: piezas },
   { key: "gohan", label: "Gohan", emoji: "🍱", items: gohan },
   { key: "hanroll", label: "Han Roll", emoji: "🌀", items: hanrolls },
-  { key: "piezas", label: "Piezas Mixtas", emoji: "🎁", items: piezas },
   { key: "snacks", label: "Snacks", emoji: "🍗", items: snacks },
   { key: "empanadas", label: "Empanadas", emoji: "🥟", items: empanadas },
 ]
